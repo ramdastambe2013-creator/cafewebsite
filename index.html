@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bean & Bloom Café</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #fffaf3;
+      color: #3e2723;
+      line-height: 1.6;
+    }
+
+    /* Navbar */
+    header {
+      background: #3e2723;
+      color: white;
+      padding: 18px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: #f8c471;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 25px;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #f8c471;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px 20px;
+      background:
+        linear-gradient(rgba(45, 25, 18, 0.65), rgba(45, 25, 18, 0.65)),
+        url("https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=1600&q=80")
+        center/cover;
+      color: white;
+    }
+
+    .hero-content {
+      max-width: 750px;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #d68910;
+      color: white;
+      padding: 13px 25px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #f8c471;
+      color: #3e2723;
+      transform: translateY(-2px);
+    }
+
+    /* General sections */
+    section {
+      padding: 80px 8%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      color: #5d4037;
+    }
+
+    .section-title p {
+      color: #795548;
+      margin-top: 8px;
+    }
+
+    /* About */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .about img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .about-text h2 {
+      font-size: 2.4rem;
+      margin-bottom: 20px;
+    }
+
+    /* Menu */
+    .menu {
+      background: #f5e6d3;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .menu-card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      transition: 0.3s;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .menu-card .icon {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .menu-card h3 {
+      margin-bottom: 8px;
+      color: #5d4037;
+    }
+
+    .price {
+      display: block;
+      margin-top: 15px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #d68910;
+    }
+
+    /* Features */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      text-align: center;
+    }
+
+    .feature {
+      padding: 25px;
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    /* Reservation */
+    .reservation {
+      background: #3e2723;
+      color: white;
+    }
+
+    .reservation .section-title h2,
+    .reservation .section-title p {
+      color: white;
+    }
+
+    form {
+      max-width: 650px;
+      margin: auto;
+      display: grid;
+      gap: 15px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    form button {
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      text-align: center;
+    }
+
+    .contact-card {
+      padding: 25px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+    }
+
+    .contact-card h3 {
+      margin-bottom: 10px;
+      color: #5d4037;
+    }
+
+    /* Footer */
+    footer {
+      background: #241510;
+      color: #ddd;
+      text-align: center;
+      padding: 25px;
+    }
+
+    footer span {
+      color: #f8c471;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      nav a {
+        margin: 0 7px;
+        font-size: 0.9rem;
+      }
+
+      .hero h1 {
+        font-size: 2.7rem;
+      }
+
+      .about,
+      .menu-grid,
+      .features,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 60px 6%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <div class="logo">☕ Bean & Bloom</div>
+
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#menu">Menu</a>
+      <a href="#reservation">Reserve</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>Fresh Coffee. Good Vibes.</h1>
+      <p>
+        Welcome to Bean & Bloom — your cozy neighborhood café
+        serving handcrafted coffee, delicious food, and sweet moments.
+      </p>
+
+      <a href="#menu" class="btn">Explore Our Menu</a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="about">
+
+      <img
+        src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1000&q=80"
+        alt="Cozy cafe interior"
+      />
+
+      <div class="about-text">
+        <h2>Our Story</h2>
+
+        <p>
+          Bean & Bloom started with a simple idea: create a warm place
+          where people can enjoy great coffee and meaningful conversations.
+        </p>
+
+        <br />
+
+        <p>
+          From carefully selected coffee beans to freshly baked pastries,
+          everything we serve is made with passion and attention to detail.
+        </p>
+
+        <br />
+
+        <a href="#contact" class="btn">Visit Us</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Menu -->
+  <section class="menu" id="menu">
+
+    <div class="section-title">
+      <h2>Our Favorites</h2>
+      <p>Made fresh, served with love.</p>
+    </div>
+
+    <div class="menu-grid">
+
+      <div class="menu-card">
+        <div class="icon">☕</div>
+        <h3>Classic Cappuccino</h3>
+        <p>Rich espresso topped with creamy steamed milk.</p>
+        <span class="price">₹180</span>
+      </div>
+
+      <div class="menu-card">
+        <div class="icon">🥐</div>
+        <h3>Butter Croissant</h3>
+        <p>Flaky, buttery and freshly baked every morning.</p>
+        <span class="price">₹140</span>
+      </div>
+
+      <div class="menu-card">
+        <div class="icon">🍰</div>
+        <h3>Chocolate Cake</h3>
+        <p>Moist chocolate cake with a rich chocolate glaze.</p>
+        <span class="price">₹220</span>
+      </div>
+
+      <div class="menu-card">
+        <div class="icon">🥪</div>
+        <h3>Grilled Sandwich</h3>
+        <p>Fresh vegetables, cheese and herbs on toasted bread.</p>
+        <span class="price">₹200</span>
+      </div>
+
+      <div class="menu-card">
+        <div class="icon">🍵</div>
+        <h3>Green Tea</h3>
+        <p>A refreshing cup of premium green tea.</p>
+        <span class="price">₹130</span>
+      </div>
+
+      <div class="menu-card">
+        <div class="icon">🥤</div>
+        <h3>Iced Latte</h3>
+        <p>Cold espresso, smooth milk and plenty of ice.</p>
+        <span class="price">₹190</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section>
+
+    <div class="section-title">
+      <h2>Why Choose Us?</h2>
+      <p>A little more than just coffee.</p>
+    </div>
+
+    <div class="features">
+
+      <div class="feature">
+        <div class="feature-icon">🌱</div>
+        <h3>Fresh Ingredients</h3>
+        <p>We use quality ingredients sourced from trusted suppliers.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">☕</div>
+        <h3>Premium Coffee</h3>
+        <p>Carefully roasted beans brewed by passionate baristas.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">❤️</div>
+        <h3>Cozy Atmosphere</h3>
+        <p>A comfortable space to work, relax or meet friends.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Reservation -->
+  <section class="reservation" id="reservation">
+
+    <div class="section-title">
+      <h2>Reserve a Table</h2>
+      <p>Planning a coffee date? We'd love to have you.</p>
+    </div>
+
+    <form onsubmit="makeReservation(event)">
+
+      <input
+        type="text"
+        id="name"
+        placeholder="Your Name"
+        required
+      />
+
+      <input
+        type="email"
+        id="email"
+        placeholder="Email Address"
+        required
+      />
+
+      <input
+        type="date"
+        id="date"
+        required
+      />
+
+      <select id="guests" required>
+        <option value="">Number of Guests</option>
+        <option>1 Guest</option>
+        <option>2 Guests</option>
+        <option>3 Guests</option>
+        <option>4 Guests</option>
+        <option>5+ Guests</option>
+      </select>
+
+      <textarea
+        id="message"
+        placeholder="Special requests..."
+      ></textarea>
+
+      <button type="submit" class="btn">
+        Reserve Table
+      </button>
+
+    </form>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+
+    <div class="section-title">
+      <h2>Come Say Hello</h2>
+      <p>We can't wait to see you.</p>
+    </div>
+
+    <div class="contact-grid">
+
+      <div class="contact-card">
+        <h3>📍 Location</h3>
+        <p>123 Coffee Street<br />Mumbai, India</p>
+      </div>
+
+      <div class="contact-card">
+        <h3>🕐 Opening Hours</h3>
+        <p>
+          Mon - Fri: 8:00 AM - 10:00 PM<br />
+          Sat - Sun: 9:00 AM - 11:00 PM
+        </p>
+      </div>
+
+      <div class="contact-card">
+        <h3>📞 Contact</h3>
+        <p>
+          +91 98765 43210<br />
+          hello@beanandbloom.com
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      © 2026 <span>Bean & Bloom Café</span>.
+      All Rights Reserved.
+    </p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    function makeReservation(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value;
+
+      alert(
+        "Thank you, " + name +
+        "! Your reservation request has been received."
+      );
+
+      event.target.reset();
+    }
+  </script>
+
+</body>
+</html>
