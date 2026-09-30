@@ -536,18 +536,32 @@
 
   <!-- JavaScript -->
   <script>
-    function makeReservation(event) {
-      event.preventDefault();
+  function makeReservation(event) {
+    event.preventDefault();
 
-      const name = document.getElementById("name").value;
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
 
-      alert(
-        "Thank you, " + name +
-        "! Your reservation request has been received."
-      );
+    const date = document.getElementById("date").value;
+    const time = document.getElementById("time").value;
+    const guests = document.getElementById("guests").value;
 
-      event.target.reset();
-    }
+    const whatsappNumber = "919653132585";
+
+    const message =
+        "Hello Bean & Bloom Cafe!%0A%0A" +
+        "I would like to reserve a table.%0A%0A" +
+        "Name: " + encodeURIComponent(name) + "%0A" +
+        "Email: " + encodeURIComponent(email) + "%0A" +
+        "Date: " + encodeURIComponent(date) + "%0A" +
+        "Time: " + encodeURIComponent(time) + "%0A" +
+        "Guests: " + encodeURIComponent(guests);
+
+    const whatsappURL =
+        "https://wa.me/" + whatsappNumber + "?text=" + message;
+
+    window.open(whatsappURL, "_blank");
+}
   </script>
 
 </body>
